@@ -3,15 +3,17 @@ using System;
 using BikeDataProject.API.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BikeDataProject.API.Migrations
 {
     [DbContext(typeof(BikeDataDbContext))]
-    partial class BikeDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200713144026_ModifiedDateTimeToDateTimeOffset")]
+    partial class ModifiedDateTimeToDateTimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
