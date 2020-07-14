@@ -8,8 +8,8 @@ namespace BikeDataProject.API.Models
     /// </summary>
     public class Track
     {
-        public IList<Location> Locations {get;set;} = new List<Location>();
+        public IList<Location> Locations { get; set; } = new List<Location>();
 
-        public int UserId {get;set;}
+        public Guid UserId { get; set; }
     }
 }

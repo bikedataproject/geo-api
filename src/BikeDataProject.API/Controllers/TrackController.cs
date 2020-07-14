@@ -23,7 +23,7 @@ namespace BikeDataProject.API.Controllers
         [HttpPost("/Track/StoreTrack")]
         public IActionResult ReceiveGpsTrack(Track track)
         {
-            if (!track.Locations.Any() || track.UserId == 0)
+            if (!track.Locations.Any() || track.UserId == null || track.UserId == Guid.Empty)
             {
                 return this.NoContent();
             }
@@ -54,7 +54,13 @@ namespace BikeDataProject.API.Controllers
             {
                 var contribution = locations.ToContribution();
                 this._dbContext.AddContribution(contribution);
-                this._dbContext.AddUserContribution(track.ToUserContribution(contribution));
+                var userId = this._dbContext.GetUserId(track.UserId);
+                if (userId != 0)
+                {
+                    this._dbContext.AddUserContribution(track.ToUserContribution(contribution.ContributionId, userId));
+                    this._dbContext.SaveChanges();
+                }
+
                 return this.Ok();
             }
             catch (Exception e)

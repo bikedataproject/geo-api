@@ -5,17 +5,23 @@ namespace BikeDataProject.API.Domain
 {
     public class User
     {
-        public int UserId {get;set;}       
+        public int Id { get; set; }
 
-        public string Provider {get;set;} 
+        public Guid UserIdentifier { get; set; }
 
-        public string AccessToken {get;set;}
+        public string Provider { get; set; }
 
-        public string RefreshToken {get;set;}
+        public string AccessToken { get; set; }
 
-        public DateTime TokenCreationDate {get;set;}
+        public string RefreshToken { get; set; }
 
-        public List<UserContribution> UserContributions {get;set;}
-        
+        public DateTime TokenCreationDate { get; set; }
+
+        public int ExpiresAt { get; set; }
+
+        public int ExpiresIn { get; set; }
+
+        public List<UserContribution> UserContributions { get; set; }
+
     }
 }

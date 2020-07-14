@@ -42,13 +42,13 @@ namespace BikeDataProject.API.Models
 
             return new Contribution()
             {
-                PointsGeom      = new PostGisWriter().Write(lineString),
-                UserAgent       = Constants.MobileAppUserAgent,
-                TimeStampStart  = locations.First().Timestamp,
-                TimeStampStop   = locations.Last().Timestamp,
-                PointsTime      = timeOffsets,
-                Distance        = Convert.ToInt32(distance),
-                Duration        = Convert.ToInt32(Math.Round(duration))
+                PointsGeom = new PostGisWriter().Write(lineString),
+                UserAgent = Constants.MobileAppUserAgent,
+                TimeStampStart = locations.First().Timestamp,
+                TimeStampStop = locations.Last().Timestamp,
+                PointsTime = timeOffsets,
+                Distance = Convert.ToInt32(distance),
+                Duration = Convert.ToInt32(Math.Round(duration))
             };
         }
     }
