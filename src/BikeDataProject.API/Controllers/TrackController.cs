@@ -23,7 +23,7 @@ namespace BikeDataProject.API.Controllers
         [HttpPost("/Track/StoreTrack")]
         public IActionResult ReceiveGpsTrack(Track track)
         {
-            if (!track.Locations.Any() || track.UserId == null)
+            if (!track.Locations.Any() || track.UserId == 0)
             {
                 return this.NoContent();
             }
