@@ -4,11 +4,11 @@ namespace BikeDataProject.API.Domain
 {
     public class UserContribution
     {
-        public Guid UserContributionId {get;set;} = Guid.NewGuid();
+        public int UserContributionId {get;set;}
 
-        public Guid UserId {get;set;}
+        public int UserId {get;set;}
         
-        public Guid ContributionId {get;set;}
+        public int ContributionId {get;set;}
         
     }
 }

@@ -10,6 +10,6 @@ namespace BikeDataProject.API.Models
     {
         public IList<Location> Locations {get;set;} = new List<Location>();
 
-        public Guid UserId {get;set;}
+        public int UserId {get;set;}
     }
 }
