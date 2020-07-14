@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BikeDataProject.API.Domain;
 using Microsoft.Extensions.Hosting;
+using BDPDatabase;
 
 namespace BikeDataProject.API
 {

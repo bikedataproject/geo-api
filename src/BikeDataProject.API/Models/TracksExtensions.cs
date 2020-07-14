@@ -1,4 +1,4 @@
-using BikeDataProject.API.Domain;
+using BDPDatabase;
 
 namespace BikeDataProject.API.Models
 {
