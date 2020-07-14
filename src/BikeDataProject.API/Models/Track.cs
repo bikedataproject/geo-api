@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace BikeDataProject.API.Models
@@ -7,8 +8,8 @@ namespace BikeDataProject.API.Models
     /// </summary>
     public class Track
     {
-        public IList<Location> Locations {get;set;}
+        public IList<Location> Locations {get;set;} = new List<Location>();
 
-        public int UserId {get;set;}
+        public Guid UserId {get;set;}
     }
 }

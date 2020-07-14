@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BikeDataProject.API.Domain;
@@ -22,19 +23,19 @@ namespace BikeDataProject.API.Controllers
         [HttpPost("/Track/StoreTrack")]
         public IActionResult ReceiveGpsTrack(Track track)
         {
-            /*
-             * [x] 1st step: We have to check the values to determine it's valid
-             * 2nd step: Format the coordinates into a byte array (PostGisWriter)
-             * 3rd step: Insert in the database
-             */
-            ICollection<Location> locations = new List<Location>();
+            if (!track.Locations.Any() || track.UserId == null)
+            {
+                return this.NoContent();
+            }
+
+            List<Location> locations = new List<Location>();
             foreach (var location in track.Locations)
             {
                 int index = track.Locations.IndexOf(location);
                 if (location.IsFromMockProvider)
                 {
                     continue;
-                }                
+                }
 
                 if (index != track.Locations.Count - 1)
                 {
@@ -49,9 +50,17 @@ namespace BikeDataProject.API.Controllers
                 }
             }
 
-
-
-            return this.NoContent();
+            try
+            {
+                var contribution = locations.ToContribution();
+                this._dbContext.AddContribution(contribution);
+                this._dbContext.AddUserContribution(track.ToUserContribution(contribution));
+                return this.Ok();
+            }
+            catch (Exception e)
+            {
+                return this.Problem(e.Message, statusCode: 500);
+            }
         }
     }
 }

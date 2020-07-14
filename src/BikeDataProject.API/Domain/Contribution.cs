@@ -3,7 +3,7 @@ namespace BikeDataProject.API.Domain
 {
     public class Contribution
     {
-        public int ContributionId {get;set;}
+        public Guid ContributionId {get;set;} = Guid.NewGuid();
 
         public string UserAgent {get;set;}
 
