@@ -24,25 +24,14 @@ namespace BikeDataProject.API.Models
                 if (i < locations.Count - 1)
                 {
                     var coord1 = coordinates[i];
-                    var coord2 = coordinates[i + 1];
-
-                    double theta = coord1.X - coord2.X;
-                    double dist = (Math.Sin(deg2rad(coord1.Y)) * Math.Sin(deg2rad(coord2.Y))) +
-                        (Math.Cos(deg2rad(coord1.Y)) * Math.Cos(deg2rad(coord2.Y)) * Math.Cos(deg2rad(theta)));
-                    dist = Math.Acos(dist);
-                    dist = rad2deg(dist);
-                    dist = dist * 60 * 1.1515 * 1.609344; // to kilometers
-                    dist = dist * 1000; // to meters
-
-                    distance += dist;
+                    var coord2 = coordinates[i + 1];     
+                    distance += calculateDistance(coord1, coord2);
                 }
             }
-            var lineString = new LineString(coordinates);
             var duration = (locations.Last().Timestamp - locations.First().Timestamp).TotalSeconds;
-
             return new Contribution()
             {
-                PointsGeom = new PostGisWriter().Write(lineString),
+                PointsGeom = new PostGisWriter().Write(new LineString(coordinates)),
                 UserAgent = Constants.MobileAppUserAgent,
                 TimeStampStart = locations.First().Timestamp,
                 TimeStampStop = locations.Last().Timestamp,
