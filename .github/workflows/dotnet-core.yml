@@ -19,7 +19,7 @@ jobs:
         dotnet-version: 3.1.x
         source-url: https://nuget.pkg.github.com/bikedataproject/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secret.PACKAGES_SECRET}}
+        NUGET_AUTH_TOKEN: ${{secrets.PACKAGES_SECRET}}
     - name: Install dependencies
       run: dotnet restore --source 
     - name: Build
