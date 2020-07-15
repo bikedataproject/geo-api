@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Add authenthicated feed.
-      run: dotnet nuget add source https://nuget.pkg.github.com/bikedataproject/index.json --name "Github Packages" --Username "xivk" --password {{secret. PACKAGES_SECRET}}
+      run: dotnet nuget add source https://nuget.pkg.github.com/bikedataproject/index.json --name "Github Packages" --Username "xivk" --password "{{secret.PACKAGES_SECRET}}"
     - name: Install dependencies
       run: dotnet restore --source 
     - name: Build
