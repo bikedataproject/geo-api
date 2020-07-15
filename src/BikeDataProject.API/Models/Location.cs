@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace BikeDataProject.API.Models
 {
@@ -11,7 +12,7 @@ namespace BikeDataProject.API.Models
 
         public double Altitude { get; set; }
 
-        public DateTimeOffset Timestamp { get; set; }
+        public DateTimeOffset DateTimeOffset { get; set; }
 
         public bool IsFromMockProvider { get; set; }
     }

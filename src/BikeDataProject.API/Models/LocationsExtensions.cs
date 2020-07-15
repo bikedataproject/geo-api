@@ -19,7 +19,7 @@ namespace BikeDataProject.API.Models
             {
                 var location = locations.ElementAt(i);
                 coordinates[i] = new Coordinate(location.Longitude, location.Latitude);
-                timeOffsets[i] = location.Timestamp;
+                timeOffsets[i] = location.DateTimeOffset;
 
                 if (i < locations.Count - 1)
                 {
@@ -28,13 +28,13 @@ namespace BikeDataProject.API.Models
                     distance += calculateDistance(coord1, coord2);
                 }
             }
-            var duration = (locations.Last().Timestamp - locations.First().Timestamp).TotalSeconds;
+            var duration = (locations.Last().DateTimeOffset - locations.First().DateTimeOffset).TotalSeconds;
             return new Contribution()
             {
                 PointsGeom = new PostGisWriter().Write(new LineString(coordinates)),
                 UserAgent = Constants.MobileAppUserAgent,
-                TimeStampStart = locations.First().Timestamp,
-                TimeStampStop = locations.Last().Timestamp,
+                TimeStampStart = locations.First().DateTimeOffset,
+                TimeStampStop = locations.Last().DateTimeOffset,
                 PointsTime = timeOffsets,
                 Distance = Convert.ToInt32(distance),
                 Duration = Convert.ToInt32(Math.Round(duration))

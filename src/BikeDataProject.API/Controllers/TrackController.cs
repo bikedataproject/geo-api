@@ -21,9 +21,9 @@ namespace BikeDataProject.API.Controllers
         }
 
         [HttpPost("/Track/StoreTrack")]
-        public IActionResult ReceiveGpsTrack(Track track)
+        public IActionResult ReceiveGpsTrack([FromBody]Track track, [FromQuery]bool? test)
         {
-            if (!track.Locations.Any() || track.UserId == null || track.UserId == Guid.Empty)
+            if (!track.Locations.Any() || track.UserId == null || ((!test.HasValue || !test.Value) && track.UserId == Guid.Empty))
             {
                 return this.NoContent();
             }

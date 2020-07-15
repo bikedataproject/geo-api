@@ -27,7 +27,7 @@ namespace BikeDataProject.API.Models
 
                 if (index != track.Locations.Count - 1)
                 {
-                    if (location.Timestamp < track.Locations.ElementAt(index + 1).Timestamp)
+                    if (location.DateTimeOffset < track.Locations.ElementAt(index + 1).DateTimeOffset)
                     {
                         locations.Add(location);
                     }
