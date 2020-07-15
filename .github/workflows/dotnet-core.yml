@@ -25,7 +25,7 @@ jobs:
       id: sub
       with:
         _input-file: NuGet.Config.actions
-        USERNAME: xivk
+        username: xivk
     - run: car NuGet.Config.actions
     - name: Install dependencies
       run: dotnet restore 
