@@ -21,10 +21,10 @@ namespace BikeDataProject.API.Models
                 coordinates[i] = new Coordinate(location.Longitude, location.Latitude);
                 timeOffsets[i] = location.DateTimeOffset;
 
-                if (i < locations.Count - 1)
+                if (i > 0 && i < locations.Count)
                 {
                     var coord1 = coordinates[i];
-                    var coord2 = coordinates[i + 1];     
+                    var coord2 = coordinates[i - 1];     
                     distance += calculateDistance(coord1, coord2);
                 }
             }

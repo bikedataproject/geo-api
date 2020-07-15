@@ -33,10 +33,11 @@ namespace BikeDataProject.API.Controllers
             try
             {
                 var contribution = locations.ToContribution();
-                this._dbContext.AddContribution(contribution);
                 var userId = this._dbContext.GetUserId(track.UserId);
                 if (userId != 0)
                 {
+                    this._dbContext.AddContribution(contribution);
+                    this._dbContext.SaveChanges();
                     this._dbContext.AddUserContribution(track.ToUserContribution(contribution.ContributionId, userId));
                     this._dbContext.SaveChanges();
                 }
