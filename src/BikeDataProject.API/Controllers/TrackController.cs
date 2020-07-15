@@ -28,27 +28,7 @@ namespace BikeDataProject.API.Controllers
                 return this.NoContent();
             }
 
-            List<Location> locations = new List<Location>();
-            foreach (var location in track.Locations)
-            {
-                int index = track.Locations.IndexOf(location);
-                if (location.IsFromMockProvider)
-                {
-                    continue;
-                }
-
-                if (index != track.Locations.Count - 1)
-                {
-                    if (location.Timestamp < track.Locations.ElementAt(index + 1).Timestamp)
-                    {
-                        locations.Add(location);
-                    }
-                }
-                else
-                {
-                    locations.Add(location);
-                }
-            }
+            var locations = track.ToLocations();
 
             try
             {

@@ -39,6 +39,6 @@ namespace BikeDataProject.API.Models
                 Distance = Convert.ToInt32(distance),
                 Duration = Convert.ToInt32(Math.Round(duration))
             };
-        }
+        }        
     }
 }
