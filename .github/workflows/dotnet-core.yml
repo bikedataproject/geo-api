@@ -25,6 +25,7 @@ jobs:
       id: sub
       with:
         _input-file: NuGet.Config.actions
+        _format-key: '%%key%%'
         username: xivk
     - run: cat NuGet.Config.actions
     - name: Install dependencies
