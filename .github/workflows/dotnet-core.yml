@@ -21,7 +21,7 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.PACKAGES_SECRET}}
     - name: Install dependencies
-      run: dotnet restore --source 
+      run: dotnet restore 
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
