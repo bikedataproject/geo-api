@@ -25,8 +25,9 @@ jobs:
       id: sub
       with:
         _input-file: NuGet.Config.actions
+        _format-key: '%%key%%'
         username: xivk
-    - run: car NuGet.Config.actions
+    - run: cat NuGet.Config.actions
     - name: Install dependencies
       run: dotnet restore 
     - name: Build
