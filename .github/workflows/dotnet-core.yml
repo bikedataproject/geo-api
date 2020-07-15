@@ -17,8 +17,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - name: Add authenthicated feed.
+      run: dotnet nuget add source https://nuget.pkg.github.com/bikedataproject/index.json --name "Github Packages" --Username "xivk" --password {{secret. PACKAGES_SECRET}}
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore --source 
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
