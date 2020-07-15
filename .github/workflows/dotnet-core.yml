@@ -17,15 +17,12 @@ jobs:
       uses: datamonsters/replace-action@v2
       with:
         files: 'NuGet.Config.actions'
-        replacements: '%%username%%=xivk'
+        replacements: '%%username%%=xivk,%%token%%=${{ secrets.TEST_SECRET }}'
     - run: cat NuGet.Config.actions
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.x
-        source-url: https://nuget.pkg.github.com/bikedataproject/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.PACKAGES_SECRET }}
     - name: Install dependencies
       run: dotnet restore 
     - name: Build
