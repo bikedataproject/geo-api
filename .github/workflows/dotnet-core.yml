@@ -13,12 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Prepare Nuget.Config
-      uses: BjornLuG/substitute-string-action@v1
+    - name: Prepare NuGet.Config
+      uses: datamonsters/replace-action
       with:
-        _input-file: NuGet.Config.actions
-        _format-key: '%%key%%'
-        username: xivk
+        files: 'NuGet.Config.actions'
+        replacements: '%%username%%=xivk'
     - run: cat NuGet.Config.actions
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
