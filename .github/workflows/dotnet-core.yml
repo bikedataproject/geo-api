@@ -13,6 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Prepare Nuget.Config
+      uses: BjornLuG/substitute-string-action@v1
+      with:
+        _input-file: NuGet.Config.actions
+        _format-key: '%%key%%'
+        username: xivk
+    - run: cat NuGet.Config.actions
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -20,14 +27,6 @@ jobs:
         source-url: https://nuget.pkg.github.com/bikedataproject/index.json
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.PACKAGES_SECRET }}
-    - name: Prepare Nuget.Config
-      uses: BjornLuG/substitute-string-action@v1
-      id: sub
-      with:
-        _input-file: NuGet.Config.actions
-        _format-key: '%%key%%'
-        username: xivk
-    - run: cat NuGet.Config.actions
     - name: Install dependencies
       run: dotnet restore 
     - name: Build
