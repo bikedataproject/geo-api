@@ -10,8 +10,11 @@ This repository holds code to register new users, either from our own applicatio
 ## How to build & run this project
 
 ```bash
-docker build -t registration-api:latest .
-docker run -d -p 80:80 --name registration registration-api:latest
+# From local Dockerfile
+docker build -t geo-api -f Dockerfile .
+# From online image
+docker build -t geo-api:latest .
+docker run -d --name geo-api geo-api:latest
 ```
 
 ## Coding conventions
