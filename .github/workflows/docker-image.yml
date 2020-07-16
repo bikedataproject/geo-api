@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag geo-api:$(date +%s)
+      run: docker build src/BikeDataProject.API/. --file src/BikeDataProject.API/Dockerfile --tag geo-api:$(date +%s)
