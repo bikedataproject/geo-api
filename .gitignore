@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=code,visualstudiocode,windows,linux,macos,visualstudio
 
 ### Code ###
+nuget.config
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

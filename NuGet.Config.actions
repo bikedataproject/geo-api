@@ -1,0 +1,13 @@
+<configuration>
+    <packageSources>
+        <clear/>
+        <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+        <add key="github-bikedataproject" value="https://nuget.pkg.github.com/bikedataproject/index.json" />
+    </packageSources>
+    <packageSourceCredentials>
+    <github-bikedataproject>
+        <add key="Username" value="%%username%%" />
+        <add key="ClearTextPassword" value="%%token%%" />
+    </github-bikedataproject>
+    </packageSourceCredentials>
+</configuration>
