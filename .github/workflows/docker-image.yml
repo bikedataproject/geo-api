@@ -28,5 +28,14 @@ jobs:
       run: dotnet publish -c release
       working-directory: ./src/BikeDataProject.API/
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag geo-api:$(date +%s)
+      run: docker build . --file Dockerfile --tag geo-api:1.0
+      working-directory: ./src/BikeDataProject.API/
+    - name: Tag the Docker image
+      run: docker tag geo-api:ghpackage docker.pkg.github.com/bikedataproject/geo-api/geo-api:1.0
+      working-directory: ./src/BikeDataProject.API/
+    - name: Build the Docker image for the package
+      run: docker build -t docker.pkg.github.com/bikedataproject/geo-api/geo-api:1.0
+      working-directory: ./src/BikeDataProject.API/
+    - name: Publish the image to GitHub packages.
+      run: docker push docker.pkg.github.com/bikedataproject/geo-api/geo-api:1.0
       working-directory: ./src/BikeDataProject.API/
