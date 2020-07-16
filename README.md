@@ -14,6 +14,7 @@ This repository holds code to register new users, either from our own applicatio
 docker build -t geo-api -f Dockerfile .
 # From online image
 docker build -t geo-api:latest .
+# Create the container based on the downloaded/created image
 docker run -d --name geo-api geo-api:latest
 ```
 
