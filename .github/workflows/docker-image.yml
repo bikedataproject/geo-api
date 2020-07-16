@@ -27,6 +27,9 @@ jobs:
     - name: Publish project
       run: dotnet publish -c release
       working-directory: ./src/BikeDataProject.API/
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag geo-api:1.0
+      working-directory: ./src/BikeDataProject.API/
     - name: Login to GitHub Packages with Docker
       run: docker login https://docker.pkg.github.com -u xivk -p ${{ secrets.PACKAGES_SECRET }}
     - name: Tag the Docker image
