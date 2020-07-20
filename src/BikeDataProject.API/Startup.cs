@@ -9,16 +9,29 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 namespace BikeDataProject.API
 {
+    /// <summary>
+    /// Contains the code handling the software startup.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initiates a new instance of the <see cref="Startup"></see> class.
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// The configuration.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">A collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -26,18 +39,22 @@ namespace BikeDataProject.API
             var connectionString = Configuration[$"{Program.EnvVarPrefix}DB"];
             services.AddDbContext<BikeDataDbContext>(ctxt => new BikeDataDbContext(
                 connectionString));
-            
+
             services.AddSwaggerDocument();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             var options = new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto
@@ -46,7 +63,7 @@ namespace BikeDataProject.API
             options.KnownProxies.Clear();
 
             app.UseForwardedHeaders(options);
-            app.Use((context, next) => 
+            app.Use((context, next) =>
             {
                 if (!context.Request.Headers.TryGetValue("X-Forwarded-PathBase", out var pathBases)) return next();
                 context.Request.PathBase = pathBases.First();
@@ -65,7 +82,7 @@ namespace BikeDataProject.API
                 }
                 return next();
             });
-            
+
             app.UseOpenApi(settings =>
             {
                 settings.PostProcess = (document, req) =>

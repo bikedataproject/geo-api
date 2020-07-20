@@ -3,6 +3,9 @@ using NetTopologySuite.Geometries;
 
 namespace BikeDataProject.API.Models
 {
+    /// <summary>
+    /// Contains all the methods that are used to simplify and help to have a clearer codebase.
+    /// </summary>
     public static class Helpers
     {
         /// <summary>

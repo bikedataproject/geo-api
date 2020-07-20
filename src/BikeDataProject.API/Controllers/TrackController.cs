@@ -7,10 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BikeDataProject.API.Controllers
 {
+    /// <summary>
+    /// Contains the code needed to handle data coming from the mobile application.
+    /// </summary>
     public class TrackController : ControllerBase
     {
         private readonly BikeDataDbContext _dbContext;
 
+        /// <summary>
+        /// Instanciates a new instance of the <see cref="TrackController"></see>.
+        /// </summary>
+        /// <param name="dbContext"></param>
         public TrackController(BikeDataDbContext dbContext) => this._dbContext = dbContext;
 
         /// <summary>

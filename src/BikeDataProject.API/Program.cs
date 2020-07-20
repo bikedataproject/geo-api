@@ -9,10 +9,18 @@ using Serilog.Formatting.Json;
 
 namespace BikeDataProject.API
 {
+    /// <summary>
+    /// Contains the code starting up the software.
+    /// </summary>
     public class Program
     {
         internal const string EnvVarPrefix = "BIKEDATA_";
         
+        /// <summary>
+        /// Method that sets up the software.
+        /// </summary>
+        /// <param name="args">Arguments passed.</param>
+        /// <returns>A status code.</returns>
         public static int Main(string[] args)
         {
             var logDir = "logs";
@@ -42,6 +50,11 @@ namespace BikeDataProject.API
             }
         }
 
+        /// <summary>
+        /// Creates the host builder.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
+        /// <returns>A host builder.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
