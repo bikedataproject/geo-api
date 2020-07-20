@@ -26,6 +26,8 @@ namespace BikeDataProject.API
             var connectionString = Configuration[$"{Program.EnvVarPrefix}DB"];
             services.AddDbContext<BikeDataDbContext>(ctxt => new BikeDataDbContext(
                 connectionString));
+            
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +65,24 @@ namespace BikeDataProject.API
                 }
                 return next();
             });
+            
+            app.UseOpenApi(settings =>
+            {
+                settings.PostProcess = (document, req) =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "Bike Data Project - Geo API";
+                    document.Info.Description = "An API allowing for the logging of GPS data..";
+                    document.Info.TermsOfService = string.Empty;
+                    document.Info.Contact = new NSwag.OpenApiContact()
+                    {
+                        Name = "Open Knowledge Belgium VZW/ASBL",
+                        Email = "dries@openknowledge.be",
+                        Url = "https://www.bikedataproject.info"
+                    };
+                };
+            });
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 

@@ -13,6 +13,10 @@ namespace BikeDataProject.API.Controllers
 
         public TrackController(BikeDataDbContext dbContext) => this._dbContext = dbContext;
 
+        /// <summary>
+        /// Gets the total distance.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("/Track/Distance")]
         public IActionResult GetTotalDistance()
         {
@@ -20,6 +24,12 @@ namespace BikeDataProject.API.Controllers
             return this.Ok(result);
         }
 
+        /// <summary>
+        /// Posts a track and stores it.
+        /// </summary>
+        /// <param name="track">The track.</param>
+        /// <param name="test">The test boolean.</param>
+        /// <returns></returns>
         [HttpPost("/Track/StoreTrack")]
         public IActionResult ReceiveGpsTrack([FromBody]Track track, [FromQuery]bool? test)
         {
