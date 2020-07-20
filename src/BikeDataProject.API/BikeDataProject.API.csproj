@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="bikedataproject.database.models.package" Version="1.0.2" />
+    <PackageReference Include="bikedataproject.database.models.package" Version="1.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
