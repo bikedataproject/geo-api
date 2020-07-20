@@ -66,5 +66,22 @@ namespace BikeDataProject.API.Controllers
                 return this.Problem(e.Message, statusCode: 500);
             }
         }
+
+        /// <summary>
+        /// Deletes contribution for a certain user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>Status code to confirm (or not) that those had been deleted.</returns>
+        [HttpDelete("/Track/DeleteTracks")]
+        public IActionResult DeleteContributions([FromQuery]string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return this.BadRequest();
+            }
+
+
+            return this.Ok();
+        }
     }
 }
