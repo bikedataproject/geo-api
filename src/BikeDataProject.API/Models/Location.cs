@@ -36,7 +36,7 @@ namespace BikeDataProject.API.Models
         /// <summary>
         /// Is From Mock Provider.
         /// </summary>
-        /// <value><c>True</c> is the data comes from a mock provider <c>False</c> if it's the otherwise case.<value>
+        /// <c>True</c> is the data comes from a mock provider <c>False</c> if it's the otherwise case.
         public bool IsFromMockProvider { get; set; }
     }
 }

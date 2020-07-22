@@ -77,7 +77,7 @@ namespace BikeDataProject.API.Controllers
         [HttpDelete("/Track/DeleteTracks")]
         public IActionResult DeleteContributions([FromQuery] Guid userId, [FromQuery] bool? test)
         {
-            if (userId == null || !((test.HasValue && test.Value) && userId == Guid.Empty))
+            if (userId == null || (test.HasValue && test.Value && userId == Guid.Empty))
             {
                 return this.BadRequest();
             }
