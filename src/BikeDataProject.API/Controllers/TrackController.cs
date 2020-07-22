@@ -77,20 +77,25 @@ namespace BikeDataProject.API.Controllers
         [HttpDelete("/Track/DeleteTracks")]
         public IActionResult DeleteContributions([FromQuery] Guid userId, [FromQuery] bool? test)
         {
-            if (userId == null || ((!test.HasValue || !test.Value) || userId == Guid.Empty))
+            if (userId == null || !((test.HasValue && test.Value) && userId == Guid.Empty))
             {
                 return this.BadRequest();
             }
 
-            /*
-             * 2nd: Delete the contributions (from their table) and then remove the link in the linked table
-             * 3rd: Send back status code
-            */
             try
             {
                 var id = this._dbContext.GetUserId(userId);
                 var contributionIds = this._dbContext.GetContributionsIds(id);
-                this._dbContext.DeleteContributions(contributionIds);
+
+                var contributions = new List<Contribution>();
+                var userContributions = this._dbContext.GetUserContributionsByContributionIds(contributionIds).ToList();
+
+                foreach (var contributionId in contributionIds)
+                {
+                    contributions.Add(new Contribution() { ContributionId = contributionId });
+                }
+
+                this._dbContext.DeleteContributions(contributions, userContributions);
             }
             catch (Exception e)
             {
