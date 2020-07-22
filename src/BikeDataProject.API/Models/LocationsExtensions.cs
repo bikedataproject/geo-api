@@ -8,8 +8,16 @@ using static BikeDataProject.API.Models.Helpers;
 
 namespace BikeDataProject.API.Models
 {
+    /// <summary>
+    /// Contains all the extensions methods for the <see cref="Location"></see> objects.
+    /// </summary>
     public static class LocationsExtensions
     {
+        /// <summary>
+        /// Gets a list of <see cref="Location"></see> and returns a <see cref="Contribution"></see>.
+        /// </summary>
+        /// <param name="locations">Locations.</param>
+        /// <returns>A <see cref="Contribution"></see>.</returns>
         public static Contribution ToContribution(this List<Location> locations)
         {
             var coordinates = new Coordinate[locations.Count];

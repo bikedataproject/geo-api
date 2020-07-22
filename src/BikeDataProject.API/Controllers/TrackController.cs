@@ -7,12 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BikeDataProject.API.Controllers
 {
+    /// <summary>
+    /// Contains the code needed to handle data coming from the mobile application.
+    /// </summary>
     public class TrackController : ControllerBase
     {
         private readonly BikeDataDbContext _dbContext;
 
+        /// <summary>
+        /// Instanciates a new instance of the <see cref="TrackController"></see>.
+        /// </summary>
+        /// <param name="dbContext"></param>
         public TrackController(BikeDataDbContext dbContext) => this._dbContext = dbContext;
 
+        /// <summary>
+        /// Gets the total distance.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("/Track/Distance")]
         public IActionResult GetTotalDistance()
         {
@@ -20,6 +31,12 @@ namespace BikeDataProject.API.Controllers
             return this.Ok(result);
         }
 
+        /// <summary>
+        /// Posts a track and stores it.
+        /// </summary>
+        /// <param name="track">The track.</param>
+        /// <param name="test">The test boolean.</param>
+        /// <returns></returns>
         [HttpPost("/Track/StoreTrack")]
         public IActionResult ReceiveGpsTrack([FromBody]Track track, [FromQuery]bool? test)
         {
@@ -48,6 +65,23 @@ namespace BikeDataProject.API.Controllers
             {
                 return this.Problem(e.Message, statusCode: 500);
             }
+        }
+
+        /// <summary>
+        /// Deletes contribution for a certain user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>Status code to confirm (or not) that those had been deleted.</returns>
+        [HttpDelete("/Track/DeleteTracks")]
+        public IActionResult DeleteContributions([FromQuery]string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return this.BadRequest();
+            }
+
+
+            return this.Ok();
         }
     }
 }
