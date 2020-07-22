@@ -28,16 +28,10 @@ jobs:
       run: dotnet publish -c release
       working-directory: ./src/BikeDataProject.API/
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag geo-api:staging
+      run: docker build . --file Dockerfile --tag bikedataproject/geo-api:staging
       working-directory: ./src/BikeDataProject.API/
-    - name: Login to GitHub Packages with Docker
-      run: echo ${{ secrets.PACKAGES_SECRET }} | docker login https://docker.pkg.github.com -u xivk --password-stdin
-    - name: Tag the Docker image
-      run: docker tag geo-api:staging docker.pkg.github.com/bikedataproject/geo-api/geo-api:staging
-      working-directory: ./src/BikeDataProject.API/
-    - name: Build the Docker image for the package
-      run: docker build -t docker.pkg.github.com/bikedataproject/geo-api/geo-api:staging .
-      working-directory: ./src/BikeDataProject.API/
-    - name: Publish the image to GitHub packages.
-      run: docker push docker.pkg.github.com/bikedataproject/geo-api/geo-api:staging
+    - name: Login to Docker
+      run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u anywaysopen --password-stdin
+    - name: Publish the docker image.
+      run: docker push bikedataproject/geo-api:staging
       working-directory: ./src/BikeDataProject.API/
