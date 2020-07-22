@@ -1,9 +1,10 @@
+using BikeDataProject.API.Models;
+using BDPDatabase;
+using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BDPDatabase;
-using BikeDataProject.API.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BikeDataProject.API.Controllers
 {
@@ -38,7 +39,7 @@ namespace BikeDataProject.API.Controllers
         /// <param name="test">The test boolean.</param>
         /// <returns></returns>
         [HttpPost("/Track/StoreTrack")]
-        public IActionResult ReceiveGpsTrack([FromBody]Track track, [FromQuery]bool? test)
+        public IActionResult ReceiveGpsTrack([FromBody] Track track, [FromQuery] bool? test)
         {
             if (!track.Locations.Any() || track.UserId == null || ((!test.HasValue || !test.Value) && track.UserId == Guid.Empty))
             {
@@ -71,17 +72,33 @@ namespace BikeDataProject.API.Controllers
         /// Deletes contribution for a certain user identifier.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
+        /// <param name="test">The test parameter.</param>
         /// <returns>Status code to confirm (or not) that those had been deleted.</returns>
         [HttpDelete("/Track/DeleteTracks")]
-        public IActionResult DeleteContributions([FromQuery]string userId)
+        public IActionResult DeleteContributions([FromQuery] Guid userId, [FromQuery] bool? test)
         {
-            if (string.IsNullOrEmpty(userId))
+            if (userId == null || ((!test.HasValue || !test.Value) || userId == Guid.Empty))
             {
                 return this.BadRequest();
             }
 
+            /*
+             * 2nd: Delete the contributions (from their table) and then remove the link in the linked table
+             * 3rd: Send back status code
+            */
+            try
+            {
+                var id = this._dbContext.GetUserId(userId);
+                var contributionIds = this._dbContext.GetContributionsIds(id);
+                this._dbContext.DeleteContributions(contributionIds);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, $"Error not handled while trying to delete a contribution, userId: ${userId}");
+                return new StatusCodeResult(500);
+            }
 
-            return this.Ok();
+            return this.Ok($"Contributions for user #${userId} had been deleted.");
         }
     }
 }
