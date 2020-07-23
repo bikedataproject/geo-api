@@ -33,6 +33,34 @@ namespace BikeDataProject.API.Controllers
         }
 
         /// <summary>
+        /// Gets the data from the database and sends them back in a formatted form.
+        /// </summary>
+        /// <returns>Status code alongside the data.</returns>
+        [HttpGet("/Track/Publish")]
+        public IActionResult GetData()
+        {
+            try
+            {
+                var durations = this._dbContext.Contributions.Sum(c => (long)c.Duration);
+                var distances = this._dbContext.Contributions.Sum(c => (long)c.Distance);
+                var rides = this._dbContext.Contributions.Count();
+
+                var data = new PublishData()
+                {
+                    TotalDuration = durations,
+                    TotalDistance = distances,
+                    TotalRides = rides
+                };
+                return this.Ok(data);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Something went wrong when trying to publish the data");
+                return this.Problem(ex.Message, statusCode: 500);
+            }
+        }
+
+        /// <summary>
         /// Posts a track and stores it.
         /// </summary>
         /// <param name="track">The track.</param>
