@@ -16,7 +16,7 @@
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BIKEDATA_DB": ""
+        "BIKEDATA_DB": "connection_string.txt"
       }
     }
   }

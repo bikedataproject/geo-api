@@ -64,6 +64,7 @@ namespace BikeDataProject.API.Controllers
             }
             catch (Exception e)
             {
+                Log.Error(e, "Error while trying to add a contribution");
                 return this.Problem(e.Message, statusCode: 500);
             }
         }
@@ -100,7 +101,7 @@ namespace BikeDataProject.API.Controllers
             catch (Exception e)
             {
                 Log.Error(e, $"Error not handled while trying to delete a contribution, userId: ${userId}");
-                return new StatusCodeResult(500);
+                return this.Problem(e.Message, statusCode: 500);
             }
 
             return this.Ok($"Contributions for user #${userId} had been deleted.");
