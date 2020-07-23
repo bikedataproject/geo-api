@@ -1,0 +1,1 @@
+Host=125.0.0.1;Port=5433;Database=bikedata;Username=postgres;Password=mixbeton

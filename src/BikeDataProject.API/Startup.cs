@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BDPDatabase;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace BikeDataProject.API
 {
@@ -36,9 +38,7 @@ namespace BikeDataProject.API
         {
             services.AddControllers();
 
-            var connectionString = Configuration[$"{Program.EnvVarPrefix}DB"];
-            services.AddDbContext<BikeDataDbContext>(ctxt => new BikeDataDbContext(
-                connectionString));
+            services.AddDbContext<BikeDataDbContext>(options => options.UseNpgsql(File.ReadAllText(Configuration[$"{Program.EnvVarPrefix}DB"])));
 
             services.AddSwaggerDocument();
         }
