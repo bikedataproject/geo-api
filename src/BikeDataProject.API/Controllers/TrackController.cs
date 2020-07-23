@@ -69,9 +69,22 @@ namespace BikeDataProject.API.Controllers
         [HttpPost("/Track/StoreTrack")]
         public IActionResult ReceiveGpsTrack([FromBody] Track track, [FromQuery] bool? test)
         {
-            if (!track.Locations.Any() || track.UserId == null || ((!test.HasValue || !test.Value) && track.UserId == Guid.Empty))
+            if (!track.Locations.Any())
             {
-                return this.NoContent();
+                Log.Error("No locations in the track");
+                return this.Problem("No locations given with the track", statusCode: 400);
+            }
+
+            if (track.UserId == null)
+            {
+                Log.Error("User identifier is null");
+                return this.Problem("No user identifier given", statusCode: 400);
+            }
+
+            if (((!test.HasValue || !test.Value) && track.UserId == Guid.Empty))
+            {
+                Log.Error($"User id is {Guid.Empty} but testing flag is not set");
+                return this.Problem($"User id is {Guid.Empty} which is not permitted, please send a valid user identifier", statusCode: 400);
             }
 
             var locations = track.ToLocations();
