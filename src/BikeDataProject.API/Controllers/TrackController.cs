@@ -64,7 +64,7 @@ namespace BikeDataProject.API.Controllers
             }
             catch (Exception e)
             {
-                Log.Error("Error while trying to add a contribution");
+                Log.Error(e, "Error while trying to add a contribution");
                 return this.Problem(e.Message, statusCode: 500);
             }
         }
