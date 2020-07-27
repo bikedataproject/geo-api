@@ -10,7 +10,7 @@ namespace BikeDataProject.API.Models
     public static class TracksExtensions
     {
         /// <summary>
-        /// Convert a contribution identifier and a user identifier to a UserContribution permitting to link and index them in the database. 
+        /// Converts a contribution identifier and a user identifier to a UserContribution permitting to link and index to them in the database. 
         /// </summary>
         /// <param name="track">A track.</param>
         /// <param name="contributionId">A contribution identifier.</param>
