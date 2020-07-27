@@ -9,7 +9,7 @@ using static BikeDataProject.API.Models.Helpers;
 namespace BikeDataProject.API.Models
 {
     /// <summary>
-    /// Contains all the extensions methods for the <see cref="Location"></see> objects.
+    /// Contains all the extension methods for the <see cref="Location"></see> objects.
     /// </summary>
     public static class LocationsExtensions
     {
@@ -23,6 +23,7 @@ namespace BikeDataProject.API.Models
             var coordinates = new Coordinate[locations.Count];
             var timeOffsets = new DateTimeOffset[locations.Count];
             var distance = 0.0;
+            //loops over the list of locations and converts it to an array of coordinates that is later added to the Contribution structure.
             for (int i = 0; i < locations.Count; i++)
             {
                 var location = locations.ElementAt(i);

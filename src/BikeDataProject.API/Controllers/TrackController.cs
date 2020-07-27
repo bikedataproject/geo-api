@@ -18,13 +18,13 @@ namespace BikeDataProject.API.Controllers
         /// <summary>
         /// Instanciates a new instance of the <see cref="TrackController"></see>.
         /// </summary>
-        /// <param name="dbContext"></param>
+        /// <param name="dbContext">The database context</param>
         public TrackController(BikeDataDbContext dbContext) => this._dbContext = dbContext;
 
         /// <summary>
-        /// Gets the total distance.
+        /// Gets the total distance of all tracks in the database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The total distance.</returns>
         [HttpGet("/Track/Distance")]
         public IActionResult GetTotalDistance()
         {
@@ -35,7 +35,7 @@ namespace BikeDataProject.API.Controllers
         /// <summary>
         /// Gets the data from the database and sends them back in a formatted form.
         /// </summary>
-        /// <returns>Status code alongside the data.</returns>
+        /// <returns>Status code alongside with the data.</returns>
         [HttpGet("/Track/Publish")]
         public IActionResult GetData()
         {
@@ -61,7 +61,7 @@ namespace BikeDataProject.API.Controllers
         }
 
         /// <summary>
-        /// Posts a track and stores it.
+        /// Posts a track and stores it in the database.
         /// </summary>
         /// <param name="track">The track.</param>
         /// <param name="test">The test boolean.</param>
@@ -115,7 +115,7 @@ namespace BikeDataProject.API.Controllers
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <param name="test">The test parameter.</param>
-        /// <returns>Status code to confirm (or not) that those had been deleted.</returns>
+        /// <returns>Status code to confirm (or deny) that the records of this user have been deleted.</returns>
         [HttpDelete("/Track/DeleteTracks")]
         public IActionResult DeleteContributions([FromQuery] Guid userId, [FromQuery] bool? test)
         {
