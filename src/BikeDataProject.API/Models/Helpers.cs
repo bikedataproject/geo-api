@@ -9,20 +9,20 @@ namespace BikeDataProject.API.Models
     public static class Helpers
     {
         /// <summary>
-        /// Converts degrees to radians
+        /// Converts an angle in degrees to an angle in radians.
         /// </summary>
-        /// <param name="deg">The degree.</param>
-        /// <returns>Degree converted in radian.</returns>
+        /// <param name="deg">The angle in degrees.</param>
+        /// <returns>The angle in radians.</returns>
         public static double deg2rad(double deg)
         {
             return (deg * Math.PI / 180.0);
         }
 
         /// <summary>
-        /// Converts radians to degrees
+        /// Converts an angle in radians to an angle in degrees.
         /// </summary>
-        /// <param name="rad">The radian.</param>
-        /// <returns>Degree as radian.</returns>
+        /// <param name="rad">The angle in radians.</param>
+        /// <returns>the angle in degrees.</returns>
         public static double rad2deg(double rad)
         {
             return (rad / Math.PI * 180.0);
