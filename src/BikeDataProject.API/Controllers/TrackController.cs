@@ -14,6 +14,7 @@ namespace BikeDataProject.API.Controllers
     public class TrackController : ControllerBase
     {
         private readonly BikeDataDbContext _dbContext;
+        private const int oneDayInSeconds = 86400;
 
         /// <summary>
         /// Instanciates a new instance of the <see cref="TrackController"></see>.
@@ -41,9 +42,9 @@ namespace BikeDataProject.API.Controllers
         {
             try
             {
-                var durations = this._dbContext.Contributions.Sum(c => (long)c.Duration);
-                var distances = this._dbContext.Contributions.Sum(c => (long)c.Distance);
-                var rides = this._dbContext.Contributions.Count();
+                var durations = this._dbContext.Contributions.Where(c => c.Duration < oneDayInSeconds).Sum(c => (long)c.Duration);
+                var distances = this._dbContext.Contributions.Where(c => c.Duration < oneDayInSeconds).Sum(c => (long)c.Distance);
+                var rides = this._dbContext.Contributions.Where(c => c.Duration < oneDayInSeconds).Count();
 
                 var data = new PublishData()
                 {
